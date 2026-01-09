@@ -49,7 +49,13 @@ jobs:
       - name: Generate 5GB random data file
         run: |
           mkdir -p ./.build
-          dd if=/dev/urandom of=./.build/random.txt bs=1M count=5120 status=progress
+          ls ./.build 
+          if [ ! -s ./.build/random.txt ]; then
+            echo "random.txt is missing or empty — generating 5GB file"
+            dd if=/dev/urandom of=./.build/random.txt bs=1M count=5120 status=progress
+          else
+            echo "random.txt already exists and is non-empty — skipping"
+          fi
       - name: Build and Test
         run: REPORT_TESTING=${{ matrix.upload-coverage }} just package-test
 
