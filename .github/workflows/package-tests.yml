@@ -47,7 +47,7 @@ jobs:
 
   test-macos:
     name: Test on Xcode (${{ matrix.name }})
-    runs-on: macos-15
+    runs-on: namespace-profile-macos-m4-6cpu-14ram
     strategy:
       matrix:
         include:

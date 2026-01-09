@@ -19,7 +19,7 @@ concurrency:
 jobs:
   build-ios:
     name: Build for iOS 15 (${{ matrix.name }})
-    runs-on: macos-15
+    runs-on: namespace-profile-macos-m4-6cpu-14ram
     strategy:
       matrix:
         include:
@@ -57,7 +57,7 @@ jobs:
 
   build-macos:
     name: Build for macOS (${{ matrix.name }})
-    runs-on: macos-15
+    runs-on: namespace-profile-macos-m4-6cpu-14ram
     strategy:
       matrix:
         include:

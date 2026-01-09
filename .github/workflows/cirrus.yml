@@ -19,7 +19,7 @@ concurrency:
 jobs:
   test-cirrus-macos:
     name: Test on Cirrus Runners macOS
-    runs-on: ghcr.io/cirruslabs/macos-runner:sequoia
+    runs-on: namespace-profile-macos-m4-6cpu-14ram
     steps:
       - uses: actions/checkout@v3
       - name: Setup tmate session
