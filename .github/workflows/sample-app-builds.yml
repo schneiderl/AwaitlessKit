@@ -1,10 +1,10 @@
 name: Sample App Builds
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  # push:
+  #   branches: [main]
+  # pull_request:
+  #   branches: [main]
   workflow_dispatch:
     inputs:
       debug_enabled:
@@ -31,7 +31,7 @@ jobs:
             xcode-version: "^16.4"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: namespacelabs/nscloud-checkout-action@v8
 
       - name: Setup debug session
         uses: ./.github/actions/setup-debug
@@ -48,9 +48,6 @@ jobs:
 
       - name: Cache Swift dependencies
         uses: ./.github/actions/cache-swift-deps
-        with:
-          platform: macos
-          cache-suffix: sample-app-${{ matrix.xcode-version }}
 
       - name: Build Sample App
         run: just sample-app-build-and-run

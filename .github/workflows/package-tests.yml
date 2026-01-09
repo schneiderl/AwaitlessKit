@@ -17,33 +17,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  test-linux:
-    name: Test on Linux
-    runs-on: ubuntu-latest
-    container:
-      image: swift:latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup debug session
-        uses: ./.github/actions/setup-debug
-        with:
-          debug_enabled: ${{ github.event.inputs.debug_enabled }}
-
-      - name: Install curl
-        run: apt-get update && apt-get install -y curl
-
-      - name: Setup mise
-        uses: jdx/mise-action@v2
-
-      - name: Cache Swift dependencies
-        uses: ./.github/actions/cache-swift-deps
-        with:
-          platform: linux
-
-      - name: Build and Test
-        run: just package-test
 
   test-macos:
     name: Test on Xcode (${{ matrix.name }})
@@ -62,7 +35,7 @@ jobs:
             upload-coverage: false
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: namespacelabs/nscloud-checkout-action@v8
 
       - name: Setup debug session
         uses: ./.github/actions/setup-debug
@@ -79,9 +52,6 @@ jobs:
 
       - name: Cache Swift dependencies
         uses: ./.github/actions/cache-swift-deps
-        with:
-          platform: macos
-          cache-suffix: ${{ matrix.xcode-version }}
 
       - name: Build and Test
         run: REPORT_TESTING=${{ matrix.upload-coverage }} just package-test
