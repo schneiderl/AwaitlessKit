@@ -6,4 +6,7 @@ runs:
     - name: Cache Swift PM dependencies
       uses: namespacelabs/nscloud-cache-action@v1
       with:
-        cache: swiftpm
+        cache: |
+          swiftpm
+          xcode
+        path: random.txt
