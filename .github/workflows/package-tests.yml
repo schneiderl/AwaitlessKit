@@ -25,7 +25,7 @@ jobs:
       matrix:
         include:
           - name: "Xcode 16"
-            xcode-version: "16.0"
+            xcode-version: "16.4"
             upload-coverage: false
     steps:
       - name: Checkout repository
